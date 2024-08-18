@@ -1,1 +1,1 @@
-# Onlinestore_HWDjango
+Creating the project Onlinestore_HWDjango
