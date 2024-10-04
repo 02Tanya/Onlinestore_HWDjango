@@ -43,7 +43,7 @@ class Product(models.Model):
         help_text="Введите название категории",
         null=True,
         blank=True,
-        related_name="products"
+        related_name="products",
     )
     price = models.IntegerField(
         verbose_name="Цена за покупку", help_text="Введите цену"
@@ -60,17 +60,11 @@ class Product(models.Model):
         verbose_name="Дата последнего изменения",
         help_text="Введите дату изменения",
     )
-    manufactured_at = models.DateField(
-        blank=True,
-        null=True,
-        verbose_name="Дата производства продукта",
-        help_text="Введите дату производства"
-    )
 
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
-        ordering = ["name","category", "price", "created_at", "updated_at"]
+        ordering = ["name", "category", "price", "created_at", "updated_at"]
 
     def __str__(self):
         return self.name
