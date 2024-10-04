@@ -17,23 +17,24 @@ class Product(models.Model):
         verbose_name="Превью",
         help_text="Загрузите фото продукта",
     )
-    category = models.CharField(
-        max_length=100,
+    category = models.ForeignKey(
+        on_delete=models.SET_NULL,
         verbose_name="Название категории",
         help_text="Введите название категории",
+        null=True,
+        blank=True,
+        related_name="products"
     )
     price = models.IntegerField(
         verbose_name="Цена за покупку", help_text="Введите цену"
     )
     created_at = models.DateField(
-        max_length=100,
         blank=True,
         null=True,
         verbose_name="Дата создания записи",
         help_text="Введите дату создания",
     )
     updated_at = models.DateField(
-        max_length=100,
         blank=True,
         null=True,
         verbose_name="Дата последнего изменения",
@@ -43,7 +44,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Продукт"
         verbose_name.plural = "Продукты"
-        ordering = ["category", "price", "created_at", "updated_at"]
+        ordering = ["name","category", "price", "created_at", "updated_at"]
 
     def __str__(self):
         return self.name
@@ -62,6 +63,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = "Категория"
         verbose_name.plural = "Категории"
+        ordering = ["name"]
 
     def __str__(self):
         return self.name
