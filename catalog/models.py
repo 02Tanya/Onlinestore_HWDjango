@@ -61,6 +61,7 @@ class Product(models.Model):
         help_text="Введите дату изменения",
     )
 
+
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
