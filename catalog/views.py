@@ -8,9 +8,17 @@ def goods_list(request):
     context = {"products": products}
     return render(request, 'goods.html', context)
 
+# def one_good(request):
+#     onegood = Product.objects.get(pk=pk)
+#     context = {"products": products}
+#     return render(request, 'goods.html', context)
+
 
 def goods(request):
     return render(request, "goods.html")
+
+# def onegood(request):
+#     return render(request, "onegood.html")
 
 
 def home(request):
