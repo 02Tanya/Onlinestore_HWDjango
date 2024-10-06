@@ -1,7 +1,7 @@
 {% load static %}
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="js/color-modes.js"></script>
+  <head><script src="{% static 'js/color-modes.js'%}"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,6 @@
 <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
 <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
 <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
 <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
 <meta name="theme-color" content="#712cf9">
@@ -171,11 +170,12 @@
           <p class="text-body-secondary">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
-          <h4>Contact</h4>
+          <h4>Menu</h4>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-white">Follow on Twitter</a></li>
-            <li><a href="#" class="text-white">Like on Facebook</a></li>
-            <li><a href="#" class="text-white">Email me</a></li>
+            <nav class="ms-5">
+                <a class="p-2 btn btn-outline-primary" href="/">Каталог</a>
+                <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
+            </nav>
           </ul>
         </div>
       </div>
