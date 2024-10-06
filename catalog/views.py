@@ -1,4 +1,13 @@
+from lib2to3.fixes.fix_input import context
+
 from django.shortcuts import render
+from catalog.models import Product, Category
+
+def goods_list(request):
+    products = Product.objects.all()
+    context = {"products": products}
+    return render(request, 'goods.html', context)
+
 
 def goods(request):
     return render(request, "goods.html")
