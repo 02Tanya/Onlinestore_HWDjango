@@ -80,6 +80,8 @@ class Blog(models.Model):
     )
     slug = models.CharField(
         max_length=100,
+        blank=True,
+        null=True,
         verbose_name="Человекочитаемый url",
         help_text="Введите slug"
     )
@@ -102,10 +104,14 @@ class Blog(models.Model):
     )
     is_published = models.BooleanField(
         default=True,
+        blank=True,
+        null=True,
         verbose_name="Дата последнего изменения",
         help_text="Введите дату изменения",
     )
     view_count = models.IntegerField(
+        blank=True,
+        null=True,
         verbose_name="Количество просмотров",
         help_text="Количество просмотров",
     )

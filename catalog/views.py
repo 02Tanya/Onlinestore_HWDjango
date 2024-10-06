@@ -3,9 +3,10 @@ from itertools import product
 from lib2to3.fixes.fix_input import context
 
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
-from catalog.models import Product, Category
+from catalog.models import Product, Category, Blog
 
 class ProductListView(ListView):
     model = Product
@@ -43,3 +44,20 @@ def index(request):
         message = request.POST.get("message")
         print(f"{name} ({phone}): {message}")
     return render(request, "contact.html")
+
+class BlogCreateView(CreateView):
+    model = Blog
+    fields = ('title', 'body', 'image')
+    success_url = reverse_lazy('home')
+
+class BlogListView(ListView):
+    model = Blog
+
+class BlogDetailView(DetailView):
+    model = Blog
+
+class BlogUpdateView(UpdateView):
+    model = Blog
+
+class BlogDeleteView(DetailView):
+    model = Blog
