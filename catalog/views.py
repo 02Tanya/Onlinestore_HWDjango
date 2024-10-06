@@ -3,30 +3,29 @@ from itertools import product
 from lib2to3.fixes.fix_input import context
 
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from catalog.models import Product, Category
 
 class ProductListView(ListView):
     model = Product
 
+class ProductDetailView(DetailView):
+    model = Product
 
 # def goods_list(request):
 #     products = Product.objects.all()
 #     context = {"products": products}
 #     return render(request, 'product_list.html', context)
 
-def one_good(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    context = {"product": product}
-    return render(request, 'catalog/good_detail.html', context)
+# def one_good(request, pk):
+#     product = get_object_or_404(Product, pk=pk)
+#     context = {"product": product}
+#     return render(request, 'catalog/product_detail.html', context)
 
 
 def goods(request):
     return render(request, "catalog/product_list.html")
-
-# def onegood(request):
-#     return render(request, "good_detail.html")
 
 
 def home(request):
