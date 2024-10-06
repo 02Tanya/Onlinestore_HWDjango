@@ -108,6 +108,7 @@ class Blog(models.Model):
         help_text="Введите дату изменения",
     )
     view_count = models.IntegerField(
+        default=0,
         blank=True,
         null=True,
         verbose_name="Количество просмотров",
