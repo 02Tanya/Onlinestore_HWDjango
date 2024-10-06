@@ -5,6 +5,7 @@ from lib2to3.fixes.fix_input import context
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from pytils.templatetags.pytils_translit import slugify
 
 from catalog.models import Product, Category, Blog
 
@@ -48,16 +49,38 @@ def index(request):
 class BlogCreateView(CreateView):
     model = Blog
     fields = ('title', 'body', 'image')
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('list')
+
+    def form_valid(self, form):
+        is form.is_valid():
+        new_mat - form.save()
+        new_mat.slug = slugify(new_mat.title)
+        new_mat.save()
+
+        return super().form_valid(form)
 
 class BlogListView(ListView):
     model = Blog
 
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        queryset = queryset.filter(is_published=True)
+        return queryset
+
 class BlogDetailView(DetailView):
     model = Blog
 
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.view_count += 1
+        self.object.save()
+        return self.object
+
 class BlogUpdateView(UpdateView):
     model = Blog
+    fields = ('title', 'body', 'image')
+    success_url = reverse_lazy('list')
 
 class BlogDeleteView(DetailView):
     model = Blog
+    success_url = reverse_lazy('list')
