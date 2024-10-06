@@ -110,7 +110,6 @@ class Blog(models.Model):
     view_count = models.IntegerField(
         default=0,
         blank=True,
-        null=True,
         verbose_name="Количество просмотров",
         help_text="Количество просмотров",
     )

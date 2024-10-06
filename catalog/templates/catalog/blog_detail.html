@@ -6,11 +6,10 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
-              <img src="{{ product.image | media_filter}}">
+              <img src="{{ blog.image | media_filter}}">
             <div class="card-body">
               <p class="card-text">{{ object.title }} ({{ object.slug }})</p>
               <p class="card-text">{{ object.body }}</p>
-              <p class="card-text">{{ object.slug }}</p>
               <p class="card-text">{{ object.is_published }}</p>
               <p class="card-text">{{ object.created_at }}</p>
               <p class="card-text">Просмотры: {{ object.view_count }}</p>

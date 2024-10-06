@@ -60,9 +60,6 @@ class BlogCreateView(CreateView):
 
         return super().form_valid(form)
 
-    def get_success_url(self):
-        return reverse('view', args=[self.kwargs.get('pk')])
-
 
 class BlogListView(ListView):
     model = Blog
@@ -75,16 +72,19 @@ class BlogListView(ListView):
 class BlogDetailView(DetailView):
     model = Blog
 
-    # def get_object(self, queryset=None):
-    #     self.object = super().get_object(queryset)
-    #     self.object.view_count += 1
-    #     self.object.save()
-    #     return self.object
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.view_count += 1
+        self.object.save()
+        return self.object
 
 class BlogUpdateView(UpdateView):
     model = Blog
     fields = ('title', 'body', 'image')
     # success_url = reverse_lazy('list')
+
+    def get_success_url(self):
+        return reverse('view', args=[self.kwargs.get('pk')])
 
 
 class BlogDeleteView(DetailView):
