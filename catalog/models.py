@@ -81,9 +81,7 @@ class Blog(models.Model):
     slug = models.CharField(
         max_length=100,
         blank=True,
-        null=True,
-        verbose_name="Человекочитаемый url",
-        help_text="Введите slug"
+        verbose_name="slug",
     )
     body = TextField(
         verbose_name="Содержимое",

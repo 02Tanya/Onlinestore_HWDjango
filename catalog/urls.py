@@ -13,7 +13,7 @@ urlpatterns = [
     path("catalog/", ProductListView.as_view(), name="goods_list"),
     path('create/', BlogCreateView.as_view(), name='create'),
     path('list/', BlogListView.as_view(), name='list'),
-    path('view/', BlogDetailView.as_view(), name='view'),
-    path('edit/', BlogUpdateView.as_view(), name='edit'),
-    path('delete/', BlogDeleteView.as_view(), name='delete'),
+    path('view/<int:pk>/', BlogDetailView.as_view(), name='view'),
+    path('edit/<int:pk>/', BlogUpdateView.as_view(), name='edit'),
+    path('delete/<int:pk>/', BlogDeleteView.as_view(), name='delete'),
 ]

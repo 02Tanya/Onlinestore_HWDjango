@@ -3,7 +3,7 @@ from itertools import product
 from lib2to3.fixes.fix_input import context
 
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from pytils.templatetags.pytils_translit import slugify
 
@@ -46,18 +46,23 @@ def index(request):
         print(f"{name} ({phone}): {message}")
     return render(request, "contact.html")
 
+
 class BlogCreateView(CreateView):
     model = Blog
     fields = ('title', 'body', 'image')
-    success_url = reverse_lazy('list')
+    success_url = reverse_lazy('catalog:list')
 
     def form_valid(self, form):
-        is form.is_valid():
-        new_mat - form.save()
-        new_mat.slug = slugify(new_mat.title)
-        new_mat.save()
+        if form.is_valid():
+            new_blog = form.save()
+            new_blog.slug = slugify(new_blog.title)
+            new_blog.save()
 
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('view', args=[self.kwargs.get('pk')])
+
 
 class BlogListView(ListView):
     model = Blog
@@ -79,7 +84,8 @@ class BlogDetailView(DetailView):
 class BlogUpdateView(UpdateView):
     model = Blog
     fields = ('title', 'body', 'image')
-    success_url = reverse_lazy('list')
+    # success_url = reverse_lazy('list')
+
 
 class BlogDeleteView(DetailView):
     model = Blog
