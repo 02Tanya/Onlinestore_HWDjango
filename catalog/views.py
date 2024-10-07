@@ -15,6 +15,19 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     model = Product
 
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ('name', 'description', 'image', 'category', 'price')
+    success_url = reverse_lazy('catalog:goods_list')
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = ('name', 'description', 'image', 'category', 'price')
+    # success_url = reverse_lazy('catalog:goods_list')
+
+    def get_success_url(self):
+        return reverse('catalog:one_good', args=[self.kwargs.get('pk')])
+
 # def goods_list(request):
 #     products = Product.objects.all()
 #     context = {"products": products}
