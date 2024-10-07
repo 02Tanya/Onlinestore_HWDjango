@@ -156,4 +156,4 @@ class Version(models.Model):
         ordering = ["version_number", "is_active", "name"]
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'

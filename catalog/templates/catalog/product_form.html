@@ -29,9 +29,9 @@
                 </div>
                 <div class="card-body">
                     <form method="post" enctype="multipart/form-data">
-                      {{ formset.management.form }}
+                      {{ formset.management_form }}
                       {% for form in formset.forms %}
-                      {{form.as_p }}
+                         {{form.as_p }}
                       {% endfor %}
                     </form>
                 </div>
