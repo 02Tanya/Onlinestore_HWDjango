@@ -79,9 +79,9 @@ class ProductUpdateView(UpdateView):
 
             formset.instance = self.object
             formset.save()
-            return super().form_valid(form)
-        else:
-            return self.render_to_response(self.get_context_data(form=form, formset=formset))
+        return super().form_valid(form)
+        # else:
+        #     return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
 
 class ProductDeleteView(DeleteView):
