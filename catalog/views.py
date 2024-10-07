@@ -7,6 +7,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from pytils.templatetags.pytils_translit import slugify
 
+from catalog.forms import ProductForm
 from catalog.models import Product, Category, Blog
 
 class ProductListView(ListView):
@@ -17,7 +18,8 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = ('name', 'description', 'image', 'category', 'price')
+    form_class = ProductForm
+    # fields = ('name', 'description', 'image', 'category', 'price')
     success_url = reverse_lazy('catalog:goods_list')
 
 class ProductUpdateView(UpdateView):
