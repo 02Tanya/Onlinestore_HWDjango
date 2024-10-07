@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import TextField
 
 
 class Category(models.Model):
@@ -69,3 +70,54 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Blog(models.Model):
+    title = models.CharField(
+        max_length=100,
+        verbose_name="Заголовок",
+        help_text="Введите название заголовка",
+    )
+    slug = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="slug",
+    )
+    body = TextField(
+        verbose_name="Содержимое",
+        help_text="Введите содержимое"
+    )
+    image = models.ImageField(
+        upload_to="blog/photo",
+        blank=True,
+        null=True,
+        verbose_name="Превью",
+        help_text="Загрузите фото",
+    )
+    created_at = models.DateField(
+        blank=True,
+        null=True,
+        verbose_name="Дата создания записи",
+        help_text="Введите дату создания",
+    )
+    is_published = models.BooleanField(
+        default=True,
+        blank=True,
+        null=True,
+        verbose_name="Дата последнего изменения",
+        help_text="Введите дату изменения",
+    )
+    view_count = models.IntegerField(
+        default=0,
+        blank=True,
+        verbose_name="Количество просмотров",
+        help_text="Количество просмотров",
+    )
+
+    class Meta:
+        verbose_name = "Блог"
+        verbose_name_plural = "Блоги"
+        ordering = ["title", "created_at", "is_published", "view_count"]
+
+    def __str__(self):
+        return self.title
