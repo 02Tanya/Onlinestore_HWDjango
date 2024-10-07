@@ -121,3 +121,38 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Version(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Версия для продукта",
+    )
+    version_number = models.PositiveIntegerField(
+        default=0,
+        null=True,
+        blank=True,
+        verbose_name="Номер версии",
+        help_text="Укажите номер версии",
+    )
+    name = models.CharField(
+        max_length=100,
+        verbose_name="Название версии",
+        help_text="Введите название версии",
+    )
+    is_active = models.BooleanField(
+        default=False,
+        verbose_name="Признак текущей версии",
+        help_text="Признак, является ли данная версия текущей",
+    )
+
+    class Meta:
+        verbose_name = "Версия"
+        verbose_name_plural = "Версии"
+        ordering = ["version_number", "is_active", "name"]
+
+    def __str__(self):
+        return self.name
