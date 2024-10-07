@@ -52,6 +52,7 @@ class BlogCreateView(CreateView):
     fields = ('title', 'body', 'image')
     success_url = reverse_lazy('catalog:list')
     def form_valid(self, form):
+        '''Метод для генерирования slug'''
         if form.is_valid():
             new_blog = form.save()
             new_blog.slug = slugify(new_blog.title)
@@ -64,6 +65,7 @@ class BlogListView(ListView):
     model = Blog
 
     def get_queryset(self, *args, **kwargs):
+        '''Метод для вывода содержимого по признаку'''
         queryset = super().get_queryset(*args, **kwargs)
         queryset = queryset.filter(is_published=True)
         return queryset
@@ -72,9 +74,10 @@ class BlogDetailView(DetailView):
     model = Blog
 
     def get_object(self, queryset=None):
+        '''Метод для счетчика просмотров'''
         self.object = super().get_object(queryset)
         self.object.view_count += 1
-        self.object.save()
+        self.object.save(update_fields=['view_count'])
         return self.object
 
 class BlogUpdateView(UpdateView):
@@ -82,6 +85,7 @@ class BlogUpdateView(UpdateView):
     fields = ('title', 'body', 'image')
     # success_url = reverse_lazy('list')
     def form_valid(self, form):
+        '''Метод для генерирования slug'''
         if form.is_valid():
             new_blog = form.save()
             new_blog.slug = slugify(new_blog.title)
