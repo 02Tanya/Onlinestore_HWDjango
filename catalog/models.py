@@ -62,7 +62,6 @@ class Product(models.Model):
         help_text="Введите дату изменения",
     )
 
-
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
@@ -83,10 +82,7 @@ class Blog(models.Model):
         blank=True,
         verbose_name="slug",
     )
-    body = TextField(
-        verbose_name="Содержимое",
-        help_text="Введите содержимое"
-    )
+    body = TextField(verbose_name="Содержимое", help_text="Введите содержимое")
     image = models.ImageField(
         upload_to="blog/photo",
         blank=True,
@@ -121,3 +117,39 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Version(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="versions",
+        null=True,
+        blank=True,
+        verbose_name="Версия для продукта",
+    )
+    version_number = models.PositiveIntegerField(
+        default=0,
+        null=True,
+        blank=True,
+        verbose_name="Номер версии",
+        help_text="Укажите номер версии",
+    )
+    name = models.CharField(
+        max_length=100,
+        verbose_name="Название версии",
+        help_text="Введите название версии",
+    )
+    is_active = models.BooleanField(
+        default=False,
+        verbose_name="Признак текущей версии",
+        help_text="Установите признак текущей версии",
+    )
+
+    class Meta:
+        verbose_name = "Версия"
+        verbose_name_plural = "Версии"
+        ordering = ["version_number", "is_active", "name"]
+
+    def __str__(self):
+        return f"{self.name}"
