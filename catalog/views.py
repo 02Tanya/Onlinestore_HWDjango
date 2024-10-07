@@ -28,6 +28,10 @@ class ProductUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('catalog:one_good', args=[self.kwargs.get('pk')])
 
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('catalog:goods_list')
+
 # def goods_list(request):
 #     products = Product.objects.all()
 #     context = {"products": products}
