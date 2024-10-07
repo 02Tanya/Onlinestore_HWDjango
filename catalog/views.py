@@ -29,7 +29,6 @@ class ProductDetailView(DetailView):
 class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
-    # fields = ('name', 'description', 'image', 'category', 'price')
     success_url = reverse_lazy("catalog:goods_list")
 
     def get_context_data(self, **kwargs):
@@ -55,7 +54,6 @@ class ProductCreateView(CreateView):
 class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
-    # fields = ('name', 'description', 'image', 'category', 'price')
     success_url = reverse_lazy("catalog:goods_list")
 
     def get_success_url(self, *args, **kwargs):
@@ -81,9 +79,9 @@ class ProductUpdateView(UpdateView):
 
             formset.instance = self.object
             formset.save()
-        return super().form_valid(form)
-        # else:
-        #     return self.render_to_response(self.get_context_data(form=form, formset=formset))
+            return super().form_valid(form)
+        else:
+            return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
 
 class ProductDeleteView(DeleteView):
@@ -175,8 +173,8 @@ class BlogDeleteView(DeleteView):
 #     model = Version
 #     form_class = VersionForm
 #     # fields = ('name', 'description', 'image', 'category', 'price')
-#     success_url = reverse_lazy('catalog:goods_list')
-#
+#     success_url = reverse_lazy('catalog:catalog')
+
 #     def form_valid(self, form):
 #         if form.is_valid():
 #             new_version = form.save()
@@ -190,4 +188,4 @@ class BlogDeleteView(DeleteView):
 #     model = Version
 #     form_class = VersionForm
 #     # fields = ('name', 'description', 'image', 'category', 'price')
-#     success_url = reverse_lazy('catalog:goods_list')
+#     success_url = reverse_lazy('catalog:catalog')

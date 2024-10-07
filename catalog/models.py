@@ -143,7 +143,7 @@ class Version(models.Model):
     is_active = models.BooleanField(
         default=False,
         verbose_name="Признак текущей версии",
-        help_text="Признак, является ли данная версия текущей",
+        help_text="Установите признак текущей версии",
     )
 
     class Meta:

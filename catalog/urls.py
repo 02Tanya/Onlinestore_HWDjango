@@ -14,6 +14,8 @@ from catalog.views import (
     ProductCreateView,
     ProductUpdateView,
     ProductDeleteView,
+    # VersionCreateView,
+    # VersionUpdateView,
 )
 
 app_name = CatalogConfig.name
