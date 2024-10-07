@@ -62,7 +62,6 @@ class Product(models.Model):
         help_text="Введите дату изменения",
     )
 
-
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
@@ -83,10 +82,7 @@ class Blog(models.Model):
         blank=True,
         verbose_name="slug",
     )
-    body = TextField(
-        verbose_name="Содержимое",
-        help_text="Введите содержимое"
-    )
+    body = TextField(verbose_name="Содержимое", help_text="Введите содержимое")
     image = models.ImageField(
         upload_to="blog/photo",
         blank=True,
@@ -156,4 +152,4 @@ class Version(models.Model):
         ordering = ["version_number", "is_active", "name"]
 
     def __str__(self):
-        return f'{self.name}'
+        return f"{self.name}"

@@ -25,7 +25,11 @@ class VersionAdmin(admin.ModelAdmin):
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     list_display = ("id", "title", "created_at", "is_published", "view_count")
-    list_filter = ("created_at", "is_published", "view_count",)
+    list_filter = (
+        "created_at",
+        "is_published",
+        "view_count",
+    )
     search_fields = (
         "title",
         "body",
