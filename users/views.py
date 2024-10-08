@@ -64,6 +64,5 @@ class RecoveryPasswordView(FormView):
             message=message,
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[user.email],
-            # fail_silently=False,
         )
         return super().form_valid(form)
