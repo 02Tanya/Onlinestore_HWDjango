@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import TextField
+from users.models import User
 
 
 class Category(models.Model):
@@ -60,6 +61,12 @@ class Product(models.Model):
         null=True,
         verbose_name="Дата последнего изменения",
         help_text="Введите дату изменения",
+    )
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
 
     class Meta:
