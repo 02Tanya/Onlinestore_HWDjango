@@ -2,7 +2,7 @@ import secrets
 
 from enum import verify
 
-
+from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
@@ -13,7 +13,7 @@ from users.forms import UserRegisterForm
 from users.models import User
 
 
-class UserCreateView(CreateView):
+class RegisterView(CreateView):
     model = User
     form_class = UserRegisterForm
     success_url = reverse_lazy('users:login')
@@ -25,11 +25,11 @@ class UserCreateView(CreateView):
         user.token = token
         user.save()
         host = self.request.get_host()
-        url = f'http://{host}/users/email-confirm/{token}/'
+        url = f'http://127.0.0.1:8000/users/email-confirm/{token}'
         send_mail(
             subject='Подтвержджение адреса электронной почты',
             message=f'Добрый день! Для подтверждения адреса электронной почты, перейдите по ссылке {url}',
-            from_email=EMAIL_HOST_USER,
+            from_email=settings.EMAIL_HOST_USER,
             recipient_list=[user.email]
         )
         return super().form_valid(form)
