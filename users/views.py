@@ -1,5 +1,8 @@
 import secrets
 
+from enum import verify
+
+
 from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
@@ -37,5 +40,3 @@ def email_verification(request, token):
     user.is_active = True
     user.save()
     return redirect(reverse("users:login"))
-
-
