@@ -5,23 +5,25 @@
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for product in object_list %}
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{{ product.image | media_filter}}">
-            <div class="card-body">
-              <p class="card-text">{{ product.name }}    {{ product.price }} руб.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a class="btn btn-outline-success" href="{% url 'catalog:one_good' product.pk %}" role="button">Подробнее</a>
-                  {% if perms.catalog.can_edit_is_published and perms.catalog.can_edit_description and perms.catalog.can_edit_category or user == product.owner %}
-                  <a class="btn btn-outline-success" href="{% url 'catalog:edit_good' product.pk %}" role="button">Изменить</a>
-                  {% endif %}
-                  <a class="btn btn-outline-warning" href="{% url 'catalog:delete_good' product.pk %}" role="button">Удалить</a>
+          {% if product.is_published == True %}
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="{{ product.image | media_filter}}">
+                <div class="card-body">
+                  <p class="card-text">{{ product.name }}    {{ product.price }} руб.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a class="btn btn-outline-success" href="{% url 'catalog:one_good' product.pk %}" role="button">Подробнее</a>
+                      {% if perms.catalog.can_edit_is_published and perms.catalog.can_edit_description and perms.catalog.can_edit_category or user == product.owner %}
+                      <a class="btn btn-outline-success" href="{% url 'catalog:edit_good' product.pk %}" role="button">Изменить</a>
+                      {% endif %}
+                      <a class="btn btn-outline-warning" href="{% url 'catalog:delete_good' product.pk %}" role="button">Удалить</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          {% endif %}
         {% endfor %}
       </div>
     </div>
