@@ -68,6 +68,11 @@ class Product(models.Model):
         null=True,
         blank=True,
     )
+    is_published = models.BooleanField(
+        default=False,
+        verbose_name="Признак публикации",
+        help_text="Установите признак публикации",
+    )
 
     class Meta:
         verbose_name = "Продукт"
