@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import BooleanField
-from catalog.models import Product, Version
+from catalog.models import Product, Version, Category
 
 
 class StyleFormMixin:
@@ -95,3 +95,10 @@ class ProductModeratorForm(StyleFormMixin, forms.ModelForm):
                 raise forms.ValidationError("Такое описание для продукта недопустимо")
 
         return cleaned_data
+
+
+class CategoryForm(StyleFormMixin, forms.ModelForm):
+
+    class Meta:
+        model = Category
+        fields = ('name',)

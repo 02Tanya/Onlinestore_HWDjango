@@ -19,6 +19,8 @@ from pytils.templatetags.pytils_translit import slugify
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Category, Blog, Version
 
+class CategoryListView(LoginRequiredMixin, ListView):
+    model = Category
 
 class ProductListView(LoginRequiredMixin, ListView):
     model = Product

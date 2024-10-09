@@ -15,7 +15,7 @@ from catalog.views import (
     BlogDeleteView,
     ProductCreateView,
     ProductUpdateView,
-    ProductDeleteView,
+    ProductDeleteView, CategoryListView,
     # VersionCreateView,
     # VersionUpdateView,
 )
@@ -35,6 +35,7 @@ urlpatterns = [
     path("view/<int:pk>/", BlogDetailView.as_view(), name="view"),
     path("edit/<int:pk>/", BlogUpdateView.as_view(), name="edit"),
     path("delete/<int:pk>/", BlogDeleteView.as_view(), name="delete"),
+    path("categories/", CategoryListView.as_view(), name="category_list"),
     # path("catalog:create/", VersionCreateView.as_view(), name='create_version'),
     # path("catalog:edit/<int:pk>/", VersionUpdateView.as_view(), name='edit_version'),
 ]
