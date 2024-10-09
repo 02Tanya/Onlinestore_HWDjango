@@ -67,3 +67,31 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Version
         fields = "__all__"
+
+
+class ProductModeratorForm(StyleFormMixin, forms.ModelForm):
+
+    class Meta:
+        model = Product
+        fields = ("description", "category", "is_published")
+
+    def clean_description(self):
+        """Валидация описания продукта"""
+        forbidden_words = [
+            "казино",
+            "криптовалюта",
+            "крипта",
+            "биржа",
+            "дешево",
+            "бесплатно",
+            "обман",
+            "полиция",
+            "радар",
+        ]
+        cleaned_data = self.cleaned_data["description"]
+
+        for word in forbidden_words:
+            if word in cleaned_data:
+                raise forms.ValidationError("Такое описание для продукта недопустимо")
+
+        return cleaned_data
