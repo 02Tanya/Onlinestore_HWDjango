@@ -25,6 +25,7 @@ class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
 
     def get_queryset(self):
+        '''Получает данные из кэш либо обращается к БД'''
         return get_categories_from_cache()
 
 
@@ -92,6 +93,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         #     return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
     def get_form_class(self):
+        '''Регулирует доступ для группы'''
         user = self.request.user
         if user == self.object.owner:
             return ProductForm
