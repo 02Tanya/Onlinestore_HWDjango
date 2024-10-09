@@ -18,9 +18,15 @@ from pytils.templatetags.pytils_translit import slugify
 
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Category, Blog, Version
+from catalog.services import get_categories_from_cache
+
 
 class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
+
+    def get_queryset(self):
+        return get_categories_from_cache()
+
 
 class ProductListView(LoginRequiredMixin, ListView):
     model = Product
